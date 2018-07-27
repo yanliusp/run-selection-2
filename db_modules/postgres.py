@@ -41,10 +41,10 @@ def get_data(DB, query_string):
             data = {'pass': False}
             return data
 
-        if data is not None:
-            print 'RESULT:', data
-        else:
-            print 'ERROR'
+        # if data is not None:
+        #     print 'RESULT:', data
+        # else:
+        #     print 'ERROR'
 
         # return 0
         return data

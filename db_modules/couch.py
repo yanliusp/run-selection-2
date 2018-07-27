@@ -37,11 +37,10 @@ def get_data(DB, run_id):
         data['exception'] = e
         return data
 
-    if data is not None:
-        print 'RESULT:', data
-
-    else:
-        print 'ERROR'
+    # if data is not None:
+    #     print 'RESULT:', data
+    # else:
+    #     print 'ERROR'
 
     # return  { 'request': r }
     return data
