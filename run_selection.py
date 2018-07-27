@@ -9,6 +9,8 @@ import argparse
 import sys
 
 import checks
+from zz_modules import write
+# import zz_modules import upload
 # import settings
 
 def main():
@@ -47,12 +49,32 @@ def main():
     # Initialize the program
     # date = datetime.strptime(args.date, '%d/%m/%Y')
 
-    # Call the checks
-    print(checks.checks(args))
+    # Doing, (writing,) and uploading the checks should happend by executing the script for each one. This hussle is required as a precoutionary measure for good run selection reporting.
 
-    # Write the checks
+    do = True
+    wr = True
+    up = False
 
-    # Upload the checks
+    file = None
+
+    if do is True:
+        # Call the checks
+        # checks.checks(args)
+        result = checks.checks(args)
+        # print(result)
+
+        if wr is True:
+            # Write the checks
+            print "Writing ..."
+            file = write.for_upload(result)
+            # write.for_upload(result)
+
+    elif up is True:
+        # Upload the checks
+        # print(upload.to_rsdb(file))
+        print "Uploading ..."
+    else:
+        print "Required ..."
 
 if __name__ == '__main__':
     main()
