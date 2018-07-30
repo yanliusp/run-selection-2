@@ -12,11 +12,11 @@ from settings import RATDB
 
 from criteria import CRITERIA
 
-def check(args):
+def check(run_id):
     '''Get the basic DQLL information from the PostgreSQL RATDB database.
     '''
 
-    run_id = args.run_number
+    # run_id = args.run_number
     query = """
         select d.data
         from ratdb_data d, ratdb_header_v2 h
@@ -26,7 +26,8 @@ def check(args):
         and h.index=''
         order by h.version desc, h.pass desc limit 1
         """ % int(run_id)
-    data = postgres.get_data(RATDB, query)
+    # data = postgres.get_data(RATDB, query)
+    data = postgres.get_data(RATDB, query)[0]
 
     if data == 1:
         context = {

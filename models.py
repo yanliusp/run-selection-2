@@ -1,3 +1,19 @@
+RS_MEMBERS = [
+    'Ian Coulter',
+    'Eric Marzec',
+    'Gersende Prior',
+    'Stefan Nae',
+    'Janet Rumleskie',
+    'Lisa Falk',
+    # 'Mark Stringer',
+    # 'Miro Mlejnek',
+    'Francesca Di Lodivico',
+    'Jeanne Wilson',
+    'Ed Leming',
+    # 'Kalpana Singh',
+    'Erica Caden',
+]
+
 RUN_TYPES = [
     'Maintenance',
     'Transition ',

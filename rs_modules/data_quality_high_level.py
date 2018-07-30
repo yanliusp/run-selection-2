@@ -241,11 +241,11 @@ def pmtProcChecksOK(pmtProc):
 
 # END RS FUNCTIONS ====================================================
 
-def check(args):
+def check(run_id):
     '''Get the basic DQHL information from CouchDB.
     '''
 
-    run_id = args.run_number
+    # run_id = args.run_number
 
     data = couch.get_data(COUCH, run_id)
 

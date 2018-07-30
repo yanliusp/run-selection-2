@@ -12,13 +12,14 @@ from settings import DETECTOR
 from criteria import CRITERIA
 from models import RUN_TYPES
 
-def check(args):
+def check(run_id):
     """Get the basic run state information from the PostgreSQL DETECTOR database.
     """
 
-    run_id = args.run_number
+    # run_id = args.run_number
     query = 'select * from run_state where run = %i' % int(run_id)
-    data = postgres.get_data(DETECTOR, query)
+    # data = postgres.get_data(DETECTOR, query)
+    data = postgres.get_data(DETECTOR, query)[0]
 
     if data == 1:
         context = {

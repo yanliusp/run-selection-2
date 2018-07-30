@@ -36,7 +36,8 @@ def get_data(DB, query_string):
         # data = cr.fetchall()
 
         try:
-            data = [dict(zip(columns, row)) for row in cr.fetchall()][0]  # fixme
+            data = [dict(zip(columns, row)) for row in cr.fetchall()]  # fixme
+            # data = [dict(zip(columns, row)) for row in cr.fetchall()][0]  # fixme
         except Exception:
             data = {'pass': False}
             return data
@@ -47,7 +48,11 @@ def get_data(DB, query_string):
         #     print 'ERROR'
 
         # return 0
-        return data
+        if len(data) == 1:
+            # return data[0]
+            return data
+        else:
+            return data
 
     except psycopg2.OperationalError as e:
         print 'The connection could not be established!'
