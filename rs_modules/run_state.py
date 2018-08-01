@@ -5,6 +5,7 @@ Write about me. To execute me try:
 """
 
 import datetime
+from six import iteritems
 
 from db_modules import postgres
 from settings import DETECTOR
@@ -68,7 +69,7 @@ def check(run_id):
 
         # Run State module decision
         status = True
-        for check, result in checks['results'].iteritems():
+        for check, result in iteritems(checks['results']):
             if result != True:
                 status = False
                 break

@@ -19,14 +19,14 @@ def get_data(DB, query_string):
     # e = None
 
     try:
-        print 'Connecting to db ...'
+        print('Connecting to db ...')
         c = psycopg2.connect(connection_details)
-        print 'You are now connected.'
+        print('You are now connected.')
         cr = c.cursor()
 
 
         query = """%s""" % query_string
-        print 'QUERY:', query
+        print('QUERY:', query)
         cr.execute(query, parameters)
 
         columns = [col[0] for col in cr.description]
@@ -43,9 +43,9 @@ def get_data(DB, query_string):
             return data
 
         # if data is not None:
-        #     print 'RESULT:', data
+        #     print('RESULT:', data)
         # else:
-        #     print 'ERROR'
+        #     print('ERROR')
 
         # return 0
         if len(data) == 1:
@@ -55,15 +55,15 @@ def get_data(DB, query_string):
             return data
 
     except psycopg2.OperationalError as e:
-        print 'The connection could not be established!'
-        print 'Error: ', e
+        print('The connection could not be established!')
+        print('Error: ', e)
         # pass
 
         return 1
 
     except Exception as e:
-        print 'The connection could not be established!'
-        print 'Error:', e
+        print('The connection could not be established!')
+        print('Error:', e)
         # pass
 
         return 1
@@ -71,7 +71,7 @@ def get_data(DB, query_string):
     finally:
         if c:
             c.close()
-            print 'The connection to rsdb is closed.'
+            print('The connection to rsdb is closed.')
 
 def main():
     """

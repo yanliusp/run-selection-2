@@ -22,14 +22,14 @@ def for_upload(data):
     details = []
 
     for module in rs_modules:
-        # print "Going through ", check
+        # print("Going through ", check)
         # for key, value in data[module].items():
-        #     print key
-        # print type(data[module]['checks']), data[module]['checks']
+        #     print(key)
+        # print(type(data[module]['checks']), data[module]['checks'])
         # try:
-        #     print data[module]['checks']['results']
+        #     print(data[module]['checks']['results'])
         # except:
-        #     print '...'
+        #     print('...')
         #     # pass
 
         for check, value in data[module]['checks']['results'].items():
@@ -39,12 +39,12 @@ def for_upload(data):
 
         summary.append(data[module]['checks']['results']['pass'])
 
-    print "Summary ..."
-    print sHeader
-    print summary
-    print "More info ..."
-    print dHeader
-    print details
+    print("Summary ...")
+    print(sHeader)
+    print(summary)
+    print("More info ...")
+    print(dHeader)
+    print(details)
 
     fn = "rs_test.csv"
     save_results(fn, details)

@@ -4,7 +4,7 @@ Run Selection tools
 Contributors: Gersende, Lisa, Eric, Tanner, Stefan
 
 ## Requirements
-  - Python 2.7.10
+  - Python 2.7.10, 3.6.1
   - Python modules: [requests](http://docs.python-requests.org), [psycopg2](http://initd.org/psycopg/docs/)
 
 #### Install only the python packages

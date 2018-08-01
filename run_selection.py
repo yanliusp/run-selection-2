@@ -15,6 +15,11 @@ from db_modules import postgres
 from settings import DETECTOR
 from models import RS_MEMBERS
 
+try:
+   input = raw_input
+except NameError:
+   pass
+
 def main():
     """
     Main Run Selection script
@@ -78,25 +83,25 @@ def main():
 
     # TODO: Move the validation into a function
     # Parse arguments
-    print "Input parameters:"
+    print("Input parameters:")
     args = parser.parse_args()
 
     # Print the arguments back to the user as confirmation
     for key, value in vars(args).items():
         if value is not None:
-            print "\t", key, "=", value
+            print("\t %s = %s" % (key, str(value)))
             if key is 'file':
-                # print 'Raw input: ', args.file.readlines()
+                # print('Raw input: {}' % args.file.readlines())
                 run_list = args.file.readlines()
-                print '\tRaw input: %s' % str(run_list)
+                print('\tRaw input: %s' % str(run_list))
     # print(type(args), args)
-    # print vars(args)
+    # print(vars(args))
     # return 0
-    confirmation = raw_input('Do you confirm? Answer with Y/ANY. ANSWER: ')
+    confirmation = input('Do you confirm? Answer with Y/ANY. ANSWER: ')
     if confirmation in ('Y', 'y', True):
         pass
     else:
-        print 'Exiting ...'
+        print('Exiting ...')
         return 0
 
     # Doing, (writing,) and uploading the checks should happend by executing the script for each one. This hussle is required as a precoutionary measure for good run selection reporting.
@@ -112,10 +117,10 @@ def main():
             WHERE run = %i
             AND run_type & 4 > 1
             """ % int(args.run_number[0])
-        # print query
+        # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print type(runs), runs
+        print(type(runs), runs)
 
     if args.run_list is not None:
         valid_list += 1
@@ -125,16 +130,16 @@ def main():
             WHERE run IN %s
             AND run_type & 4 > 1
             """ % str(tuple(args.run_list))
-        # print query
+        # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print type(runs), runs
+        print(type(runs), runs)
 
     if args.run_range is not None:
         valid_list += 1
         range = args.run_range
         range.sort()
-        print type(range), range
+        print(type(range), range)
         # get a list of physics runs from that range
         query = """
             SELECT run
@@ -142,10 +147,10 @@ def main():
             WHERE run BETWEEN %s AND %s
             AND run_type & 4 > 1
             """ % tuple(range)
-        # print query
+        # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print type(runs), runs
+        print(type(runs), runs)
 
     if args.date is not None:
         valid_list += 1
@@ -160,28 +165,28 @@ def main():
             AND run_type & 4 > 1
             ORDER BY run ASC
             """ % (t1, t2)
-        # print query
+        # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print type(runs), runs
+        print(type(runs), runs)
         # return 0
 
     if args.file is not None:
         valid_list += 1
         # run_list = args.file.readlines()
-        print type(run_list), run_list
+        print(type(run_list), run_list)
         parsed_list = [int(x.strip('\n')) for x in run_list]
-        print parsed_list
+        print(parsed_list)
         query = """
             SELECT run
             FROM run_state
             WHERE run IN %s
             AND run_type & 4 > 1
             """ % str(tuple(parsed_list))
-        # print query
+        # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print type(runs), runs
+        print(type(runs), runs)
         # return 0
 
     if valid_list == 1:
@@ -200,15 +205,15 @@ def main():
     print('Found %i run/s maching your selection.' % len(runs))
     if len(runs) > 0:
 
-        confirmation = raw_input('Do you want to continue? Answer with Y/ANY. ANSWER: ')
+        confirmation = input('Do you want to continue? Answer with Y/ANY. ANSWER: ')
         if confirmation in ('Y', 'y', True):
             pass
         else:
-            print 'Exiting ...'
+            print('Exiting ...')
             return 0
 
     else:
-        print 'Exiting ...'
+        print('Exiting ...')
         return 0
 
     # do = True
@@ -221,25 +226,25 @@ def main():
     # if do is True:
     if args.operation == 'do':
         # Call the checks
-        print "Doing ..."
+        print("Doing ...")
         for run in runs:
             # checks.checks(args)
-            print type(run), run, run['run']
+            print(type(run), run, run['run'])
             result = checks.checks(int(run['run']))
             # print(result)
 
             if wr is True:
                 # Write the checks
-                print "Writing ..."
+                print("Writing ...")
                 f = write.for_upload(result)
                 # write.for_upload(result)
 
     elif up is True:
         # Upload the checks
         # print(upload.to_rsdb(f))
-        print "Uploading ..."
+        print("Uploading ...")
     else:
-        print "Required ..."
+        print("Required ...")
 
     return 0
 

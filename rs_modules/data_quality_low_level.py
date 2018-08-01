@@ -6,6 +6,7 @@ Write about me. To execute me try:
 
 # import json
 from collections import OrderedDict
+from six import iteritems
 
 from db_modules import postgres
 from settings import RATDB
@@ -141,7 +142,7 @@ def check(run_id):
 
             # DQLL module decision
             status = True
-            for key, value in checks['results'].iteritems():
+            for key, value in iteritems(checks['results']):
                 if value != True: # There are failed checks
                     status = False
                     break

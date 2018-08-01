@@ -3,6 +3,7 @@
 Write about me. To execute me try:
     python couch.py
 """
+import base64
 import requests
 # import json
 
@@ -14,7 +15,7 @@ def get_data(DB, run_id):
 
     headers = {}
     headers['Content-type']  = 'application/json'
-    headers['Authorization'] = 'Basic {}'.format((connection_details.encode('base64')).rstrip())
+    headers['Authorization'] = 'Basic {}'.format(str(base64.b64encode(connection_details.encode())).replace('b\'', '\'').strip('\''))
 
     url = '{}/data-quality/_design/data-quality/_view/runs'.format(DB['HOST'])
 
@@ -38,9 +39,9 @@ def get_data(DB, run_id):
         return data
 
     # if data is not None:
-    #     print 'RESULT:', data
+    #     print('RESULT:', data)
     # else:
-    #     print 'ERROR'
+    #     print('ERROR')
 
     # return  { 'request': r }
     return data
