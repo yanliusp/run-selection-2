@@ -6,13 +6,22 @@ Write about me. To execute me try:
 
 import csv
 
-def save_results(filename, results):
-    with open(filename, 'w') as f:
+def save_results(header, results, first, filename):
+    # f_flags = 'a'
+    if first:
+        f_flags = 'w+'
+    else:
+        f_flags = 'a'
+
+    with open(filename, f_flags) as f:
         csv_writer = csv.writer(f)
         # csv_writer.writerows(results)
+        if first:
+            csv_writer.writerow(header)
+
         csv_writer.writerow(results)
 
-def for_upload(data):
+def for_upload(run, data, first, filename='csv_data/default.csv'):
 
     rs_modules = ['state', 'dqll', 'dqhl']
 
@@ -20,6 +29,9 @@ def for_upload(data):
     summary = []
     dHeader = []
     details = []
+
+    dHeader.append('RUNRUN')
+    details.append(run)
 
     for module in rs_modules:
         # print("Going through ", check)
@@ -34,7 +46,8 @@ def for_upload(data):
 
         for check, value in data[module]['checks']['results'].items():
             if check != 'pass':
-                dHeader.append(check)
+                # dHeader.append(check)
+                dHeader.append(''.join(sorted(str(value).upper())))
                 details.append(value)
 
         summary.append(data[module]['checks']['results']['pass'])
@@ -46,8 +59,7 @@ def for_upload(data):
     print(dHeader)
     print(details)
 
-    fn = "rs_test.csv"
-    save_results(fn, details)
+    save_results(dHeader, details, first, filename)
 
     return data
 

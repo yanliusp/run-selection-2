@@ -12,7 +12,7 @@ import checks
 from zz_modules import write
 # import zz_modules import upload
 from db_modules import postgres
-from settings import DETECTOR
+from settings import DETECTOR, RSDB
 from models import RS_MEMBERS
 
 try:
@@ -226,23 +226,34 @@ def main():
     # if do is True:
     if args.operation == 'do':
         # Call the checks
-        print("Doing ...")
-        for run in runs:
+        size = len(runs)
+        label = 'run'
+        if size > 1:
+            label += 's'
+        print("Checking {} {}.".format(size, label))
+        # return 0
+        for run in sorted(runs):
             # checks.checks(args)
             print(type(run), run, run['run'])
+            print("Checking run {}.".format(run))
             result = checks.checks(int(run['run']))
             # print(result)
 
             if wr is True:
                 # Write the checks
-                print("Writing ...")
-                f = write.for_upload(result)
+                if size < len(runs):
+                    first_run = False
+                else:
+                    first_run = True
+                size -= 1
+                print("Writing run {}.".format(run))
+                f = write.for_upload(run['run'], result, first_run)
                 # write.for_upload(result)
 
-    elif up is True:
+    elif args.operation == 'up':
         # Upload the checks
-        # print(upload.to_rsdb(f))
         print("Uploading ...")
+        postgres.upload_csv(RSDB)
     else:
         print("Required ...")
 

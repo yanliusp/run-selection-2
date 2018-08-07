@@ -27,3 +27,17 @@ COUCH = {
         'PASS': '',
     },
 }
+
+RSDB = {
+    'HOST': 'pgsql.snopl.us',
+    'NAME': 'runselection',
+    'PORT': 5400,
+    'READ': {
+        'USER': '',
+        'PASS': '',
+    },
+    'WRITE': {
+        'USER': '',
+        'PASS': '',
+    },
+}
