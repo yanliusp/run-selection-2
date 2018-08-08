@@ -48,7 +48,10 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
             if check != 'pass':
                 # dHeader.append(check)
                 dHeader.append(''.join(sorted(str(value).upper())))
-                details.append(value)
+                if value == True:
+                    details.append(value)
+                else:
+                    details.append('FFFF')
 
         summary.append(data[module]['checks']['results']['pass'])
 
