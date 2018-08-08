@@ -4,6 +4,7 @@ Write about me. To execute me try:
     python write.py
 """
 
+import os
 import csv
 
 def save_results(header, results, first, filename):
@@ -13,11 +14,19 @@ def save_results(header, results, first, filename):
     else:
         f_flags = 'a'
 
+    directory = filename.split('/')[0]
+
+    if not os.path.exists(directory):
+        try:
+            os.makedirs(directory)
+        except Exception as e:
+            return e
+
     with open(filename, f_flags) as f:
         csv_writer = csv.writer(f)
         # csv_writer.writerows(results)
-        # if first:
-        #     csv_writer.writerow(header)
+        if first:
+            csv_writer.writerow(header)
 
         csv_writer.writerow(results)
 
@@ -30,7 +39,7 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
     dHeader = []
     details = []
 
-    # dHeader.append('RUNRUN')
+    dHeader.append('RUNRUN')
     details.append(run)
 
     for module in rs_modules:
@@ -48,6 +57,7 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
             if check != 'pass':
                 # dHeader.append(check)
                 # dHeader.append(''.join(sorted(str(value).upper())))
+                dHeader.append(module[:4])
                 if value == True:
                     details.append(value)
                 else:
@@ -55,9 +65,9 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
 
         summary.append(data[module]['checks']['results']['pass'])
 
-    print("Summary ...")
-    print(sHeader)
-    print(summary)
+    # print("Summary ...")
+    # print(sHeader)
+    # print(summary)
     # print("More info ...")
     # print(dHeader)
     # print(details)
