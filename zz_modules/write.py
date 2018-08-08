@@ -26,6 +26,7 @@ def save_results(header, results, first, filename):
         csv_writer = csv.writer(f)
         # csv_writer.writerows(results)
         if first:
+            print("Writing results to {}.".format(filename))
             csv_writer.writerow(header)
 
         csv_writer.writerow(results)

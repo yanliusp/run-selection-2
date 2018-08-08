@@ -120,7 +120,7 @@ def main():
         # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print(type(runs), runs)
+        # print(type(runs), runs)
 
     if args.run_list is not None:
         valid_list += 1
@@ -133,13 +133,13 @@ def main():
         # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print(type(runs), runs)
+        # print(type(runs), runs)
 
     if args.run_range is not None:
         valid_list += 1
         range = args.run_range
         range.sort()
-        print(type(range), range)
+        # print(type(range), range)
         # get a list of physics runs from that range
         query = """
             SELECT run
@@ -150,7 +150,7 @@ def main():
         # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print(type(runs), runs)
+        # print(type(runs), runs)
 
     if args.date is not None:
         valid_list += 1
@@ -168,15 +168,15 @@ def main():
         # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print(type(runs), runs)
+        # print(type(runs), runs)
         # return 0
 
     if args.file is not None:
         valid_list += 1
         # run_list = args.file.readlines()
-        print(type(run_list), run_list)
+        # print(type(run_list), run_list)
         parsed_list = [int(x.strip('\n')) for x in run_list]
-        print(parsed_list)
+        # print(parsed_list)
         query = """
             SELECT run
             FROM run_state
@@ -186,7 +186,7 @@ def main():
         # print(query)
         # return 0
         runs = postgres.get_data(DETECTOR, query)
-        print(type(runs), runs)
+        # print(type(runs), runs)
         # return 0
 
     if valid_list == 1:
@@ -234,8 +234,8 @@ def main():
         # return 0
         for run in sorted(runs):
             # checks.checks(args)
-            print(type(run), run, run['run'])
-            print("Checking run {}.".format(run))
+            # print(type(run), run, run['run'])
+            print("Checking run {}.".format(int(run['run'])))
             result = checks.checks(int(run['run']))
             # print(result)
 
@@ -246,8 +246,8 @@ def main():
                 else:
                     first_run = True
                 size -= 1
-                print("Writing run {}.".format(run))
                 f = write.for_upload(run['run'], result, first_run)
+                # print("Writing run {}.".format(int(run['run'])))
                 # write.for_upload(result)
 
     elif args.operation == 'up':

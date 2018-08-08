@@ -21,14 +21,14 @@ def get_data(DB, query_string):
     # e = None
 
     try:
-        print('Connecting to db ...')
+        # print('Connecting to db ...')
         c = psycopg2.connect(connection_details)
-        print('You are now connected.')
+        # print('You are now connected.')
         cr = c.cursor()
 
 
         query = """%s""" % query_string
-        print('QUERY:', query)
+        # print('QUERY:', query)
         cr.execute(query, parameters)
 
         columns = [col[0] for col in cr.description]
@@ -73,7 +73,7 @@ def get_data(DB, query_string):
     finally:
         if c:
             c.close()
-            print('The connection to rsdb is closed.')
+            # print('The connection to rsdb is closed.')
 
 def upload_csv(DB, filename='csv_data/default.csv'):
     connection_details = ''
