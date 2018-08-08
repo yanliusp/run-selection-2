@@ -16,8 +16,8 @@ def save_results(header, results, first, filename):
     with open(filename, f_flags) as f:
         csv_writer = csv.writer(f)
         # csv_writer.writerows(results)
-        if first:
-            csv_writer.writerow(header)
+        # if first:
+        #     csv_writer.writerow(header)
 
         csv_writer.writerow(results)
 
@@ -30,7 +30,7 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
     dHeader = []
     details = []
 
-    dHeader.append('RUNRUN')
+    # dHeader.append('RUNRUN')
     details.append(run)
 
     for module in rs_modules:
@@ -47,7 +47,7 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
         for check, value in data[module]['checks']['results'].items():
             if check != 'pass':
                 # dHeader.append(check)
-                dHeader.append(''.join(sorted(str(value).upper())))
+                # dHeader.append(''.join(sorted(str(value).upper())))
                 if value == True:
                     details.append(value)
                 else:
@@ -58,9 +58,9 @@ def for_upload(run, data, first, filename='csv_data/default.csv'):
     print("Summary ...")
     print(sHeader)
     print(summary)
-    print("More info ...")
-    print(dHeader)
-    print(details)
+    # print("More info ...")
+    # print(dHeader)
+    # print(details)
 
     save_results(dHeader, details, first, filename)
 
