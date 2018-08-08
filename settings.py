@@ -41,3 +41,13 @@ RSDB = {
         'PASS': '',
     },
 }
+
+NEARLINE = {
+    'HOST': 'pgsql.snopl.us',
+    'NAME': 'nearline',
+    'PORT': 5400,
+    'READ': {
+        'USER': '',
+        'PASS': '',
+    },
+}

@@ -23,7 +23,7 @@ def save_results(header, results, first, filename):
 
 def for_upload(run, data, first, filename='csv_data/default.csv'):
 
-    rs_modules = ['state', 'dqll', 'dqhl', 'muons']
+    rs_modules = ['state', 'dqll', 'dqhl', 'muons', 'ping']
 
     sHeader = ','.join(rs_modules)
     summary = []

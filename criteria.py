@@ -9,4 +9,5 @@ CRITERIA = {
     'kAmendedMaxMissGTIDCount': 10,
     'kAmendedMaxRetriggerRate': 15.0,
     'MAX_MUONS': 100,
+    'MAX_PING_CRATES_FAILED' : 0,
 }

@@ -8,6 +8,7 @@ from rs_modules import run_state
 from rs_modules import data_quality_low_level as dqll
 from rs_modules import data_quality_high_level as dqhl
 from rs_modules import muons
+from rs_modules import ping_crates as ping
 # from rs_modules import shift_report
 
 def checks(run):
@@ -21,6 +22,7 @@ def checks(run):
     context['dqll'] = dqll.check(run)
     context['dqhl'] = dqhl.check(run)
     context['muons'] = muons.check(run)
+    context['ping'] = ping.check(run)
     # context['shift_report'] = shift_report.check(run)
 
     return context
