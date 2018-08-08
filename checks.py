@@ -7,6 +7,7 @@ Write about me. To execute me try:
 from rs_modules import run_state
 from rs_modules import data_quality_low_level as dqll
 from rs_modules import data_quality_high_level as dqhl
+from rs_modules import muons
 # from rs_modules import shift_report
 
 def checks(run):
@@ -19,6 +20,7 @@ def checks(run):
     context['state'] = run_state.check(run)
     context['dqll'] = dqll.check(run)
     context['dqhl'] = dqhl.check(run)
+    context['muons'] = muons.check(run)
     # context['shift_report'] = shift_report.check(run)
 
     return context

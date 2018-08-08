@@ -8,4 +8,5 @@ CRITERIA = {
     'kAmendedMaxEventRate' : 7000,
     'kAmendedMaxMissGTIDCount': 10,
     'kAmendedMaxRetriggerRate': 15.0,
+    'MAX_MUONS': 100,
 }
